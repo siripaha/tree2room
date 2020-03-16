@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+    <head> 
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="img/favicon.png" type="image/png">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <title>tree2room</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="vendors/linericon/style.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+        <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
+        <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
+        <link rel="stylesheet" href="vendors/animate-css/animate.css">
+        <link rel="stylesheet" href="vendors/popup/magnific-popup.css">
+        <!-- main css -->
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <script>
+            var from=null,start=0,url='http://localhost/test/chat.php';
+            // from = prompt("plaese enter your name");
+            $(document).ready(function(){      
+                      
+                load();
+                $('form').submit(function(e){
+                    $.post(url, {
+                        message: $('#message').val(),
+                        from:$('#name').val(),
+                    });
+                    $('#message').val('');
+                    $('#name').val('');
+                   
+                    return false;
+                   
+                })
+             
+        });
+        function load(){
+            $.get(url+'?start='+start,function(result){
+                if(result.items){
+                    result.items.forEach(item => {
+                        start = item.id;
+                        $('#messages').append(renderMessage(item));
+                        
+                    });
+                    $('#message').animate({scrollTop:$('#messages')[0].scrollHeight});
+                };
+                load();
+                
+            })
+        }
+        function renderMessage(item){
+            let time = new Date(item.created)
+            time = time.getHours()+":"+time.getMinutes()
+            return '<div class="msg"><p>'+item.f+'</p>'+item.m+'<span>'+time+'</span></div>';
+            // console.log(item)
+        }
+        </script>
+        <style>
+            /* body{
+                margin: 0;
+                overflow: hidden;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            /* }* */
+            #messages{
+                height: 88;
+                overflow: hidden;
+                padding: 100px;
+            } 
+            form{
+                display: flex;
+    
+            }
+            input{
+                font-size: 1rem;
+                padding:10px;
+                margin: 10px 5px;
+                appearance: none;
+                -webkit-appearance: none;
+                border:1px solid #ccc;
+                border-radius: 5px;
+            }
+            #message{
+                flex :2;
+            
+            }
+            #name{
+                flex :2;
+            
+            }
+            .msg{
+                background-color: #82E0AA ;
+                padding: 5px 10px;
+                border-radius: 5px;
+                margin-bottom: 8px;
+                width:fit-content
+            }
+            .msg p{
+                margin:0;
+                font-weight: bold;
+            }
+            .msg span{
+                font-size: 0.5rem;
+                margin-left: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        
+        	<!--================Header Menu Area =================-->
+       <header class="header_area">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a class="navbar-brand logo_h" href="index.html"><img src="img/logoo.png" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                 </button>
+                	<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+							<ul class="nav navbar-nav menu_nav ml-auto">
+								<li class="nav-item active"><a class="nav-link" href="index.html">หน้าแรก</a></li> 
+								<li class="nav-item submenu dropdown">
+									<a href="index.html" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">หมวดหมู่</a>
+									<ul class="dropdown-menu">
+										<li class="nav-item"><a class="nav-link" href="Cactus.html">แคดตัส</a>
+                                        <li class="nav-item"><a class="nav-link" href="Climbing_plants.html">ไม้เลื้อย</a>
+                                        <li class="nav-item"><a class="nav-link" href="Fence_tree.html">ไม้แนวรั้ว</a>
+                                        <li class="nav-item"><a class="nav-link" href="Flowering_plant.html">ไม้ดอก</a>
+                                        <li class="nav-item"><a class="nav-link" href="Ornamental_plant.html">ไม้ประดับ</a>
+                                        <li class="nav-item"><a class="nav-link" href="Shrub.html">ไม้พุ่ม</a> </li>
+									</ul>
+								</li> 
+								<li class="nav-item"><a class="nav-link" href="contact.html">ติดต่อเรา</a></li>
+								<li class="nav-item submenu dropdown">
+									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">บล็อก</a>
+									<ul class="dropdown-menu">
+										<li class="nav-item"><a class="nav-link" href="http://localhost/tree2room/index.php">อัพโหลด</a>
+									</ul>
+						</div> 
+					</div>
+            	</nav>
+            </div>
+        </header>
+        <!--================Header Menu Area =================-->
+     <!--================Home Banner Area =================-->
+     <section class="banner_area">
+        <div class="box_1620">
+            <div class="banner_inner d-flex align-items-center">
+                <div class="container">
+                    <div class="banner_content text-center">
+                        <h2>Hibiscus flowers</h2>
+                        <div class="page_link">
+                            <a href="index.html">หน้าแรก</a>
+                            <a href="about-us.html">หมวดหมู่</a>
+                            <a href="Flowering_plant.html">ไม้ดอก</a>
+                            <a href="Hibiscus_flowers.html">ดอกชบา</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+        
+    <section class="blog_area single-post-area p_120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 posts-list">
+                    <div class="single-post row">
+                        <div class="col-lg-12">
+                         <center><div class="feature-img">
+                                <img class="img-fluid" src="img/blog/feature-img33.jpg" alt="">
+                            </div>									
+                        </div>
+                        <div class="col-lg-3  col-md-3">
+                            <div class="blog_info text-right">
+                                <div class="post_tag">
+                                    <a href="Cactus.html">Cactus,</a>
+                                    <a href="Climbing_plants.html">Climbing plants,</a>
+                                    <a href="Fence_tree.html">Fence tree,</a>
+                                    <a class="active"  href="Flowering_plant.html">Flowering plant,</a>
+                                    <a href="Ornamental_plant.html">Ornamental plant,</a>
+                                    <a href="Shrub.html">Shrub</a>
+                                </div>
+                                <ul class="blog_meta list">
+                                    <li><a href="#">Cnn.gineer<i class="lnr lnr-user"></i></a></li>
+                                    <li><a href="#">30 Apr,2050<i class="lnr lnr-calendar-full"></i></a></li>
+                                    <li><a href="#">12.1M Views<i class="lnr lnr-eye"></i></a></li>
+                                    <li><a href="#">05 Comments<i class="lnr lnr-bubble"></i></a></li>
+                                </ul>
+                                <ul class="social-links">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-github"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 blog_details">
+                            <h2> ดอกชบา (Hibiscus flowers)</h2>
+                            <p class="excert">
+                                ความเชื่อของคนโบราณในบ้านเรานั้นยังมีอคติกับดอกชบาอยู่ อาจเป็นเพราะเราได้รับดอกชบามาจากอินเดีย จึงได้รับความเชื่อของคนอินเดียมาด้วย เพราะในอินเดียนั้นดอกชบาจะนำมาใช้บูชาเจ้าแม่กาลี และนำมาร้อยพวงมาลัยสวมคอนักโทษประหาร และความหมายของดอกชบาในสมัยสมเด็จพระพุทธยอดฟ้าจุฬาโลกฯ จะใช้ดอกชบาไว้สำหรับลงโทษและประจานผู้หญิงร้ายหรือผู้หญิงแพศยา ด้วยการนำดอกชบามาทัดหูทั้ง 2 ข้าง และร้อยดอกชบาแดงเป็นมาลัยใส่ศีรษะและใส่คอ ด้วยเหตุนี้จึงทำให้คนโบราณไม่นิยมใช้และมีอคติกับดอกชบานั่นเอง 
+
+                                แต่ความสวยงามของดอกชบานั้น ในต่างประเทศให้สมญานามดอกชบาว่าเป็น ราชินีแห่งไม้ดอกเมืองร้อน (Queen of tropic flower) เลยทีเดียว และยังจัดเป็นดอกไม้ประจำชาติของประเทศมาเลเซีย จาไมก้า รวมไปถึงรัฐฮาวายอีกด้วย ซึ่งเป็นที่ได้รับความนิยมอย่างมากในการนำมาทัดหูหรือแซมผม
+                            </p>
+                            <p>
+                                ประโยชน์ชบา
+                                ชบา เป็นไม้ประดับดอกที่นิยมปลูกมากในต่างประเทศ โดยเฉพาะในฮาวาย และประเทศเขตร้อนต่างๆ เนื่องจาก ตัวดอกมีขนาดใหญ่ กลีบดอกมีสีสันสวยงาม ทั้งปลูกในแปลงจัดสวน ปลูกหน้าบ้าน และปลูกในกระถาง
+                                กลีบดอกชบาในต่างประเทศนิยมใช้ทัดหูหรือสอดประดับศรีษะ รวมถึงนำมาถกร้อยเป็นพวงมาลัยคล้องศรีษะ ส่วนประเทศไทย การนำดอกชบามาทัดหูหรือประดับศรีษะจะไม่นิยม เนื่องจาก ในสมัยอดีตคนไทยมีความเชื่อว่า ดอกไม้ชนิดนี้ซึ่งมีสีสันฉูดฉาด ถือ เป็นดอกไม้ที่เป็นตัวแทนของหญิงกากีหรือหญิงสองใจ รวมถึงหญิงที่มักมากในกาม หญิงไม่มีการสำรวม ชอบเต้นรำหาความสำราญไปวันๆ
+                                ชบา นอกจากปลูกเพื่อประดับดอกแล้ว ยังนิยมปลูกสำหรับเป็นแนวรั้วหน้าบ้านร่วมด้วย
+                                กลีบดอกชบาที่มีสีสันฉูดฉาด นำมาคั้นสกัดเอาน้ำสำหรับต้มย้อมผ้า ย้อมสีกระดาษ รวมถึงใช้ผสมทำขนมของหวานเพื่อให้ขนมมีสี
+                              
+                            </p>
+              
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="quotes">
+                                ลักษณะของดอกชบา : มีลักษณะเป็นไม้พุ่มขนาดกลาง ใบค่อนข้างมนรี มีปลายแหลม ขอบของใบเป็นจักเล็กน้อย และมีสีเขียวเข้ม เมื่อขยี้ใบจะเป็นเมือกเหนียว ลักษณะดอกชบา มีทั้งกลีบชั้นเดียวและหลายชั้น หากเป็นชั้นเดียวปกติจะมีกลีบดอก 5 กลีบ มีก้านเกสรอยู่ตรงกลางดอกหนึ่งก้าน ลักษณะของกลีบดอกชบาจะมีขนาดใหญ่ มีหลายสีไม่ว่าจะเป็น ขาว แดง แสด เหลือง ม่วง ชมพู และสีอื่น ๆ โดยดอกชบาแบ่งออกเป็น 3 ลักษณะคือ ดอกบานเป็นรูปถ้วย, ดอกบานเป็นรูปแผ่แบน, กลีบดอกบานแบบแผ่โค้ง และขยายพันธุ์ด้วยการปักชำ การติดตา และการเสียบยอด
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <img class="img-fluid" src="img/blog/post-img35.jpg" alt="">
+                                </div>
+                                <div class="col-6">
+                                    <img class="img-fluid" src="img/blog/post-img36.jpg" alt="">
+                                </div>	
+                                <div class="col-lg-12 mt-25">
+                                    <p>
+                                        การปลูกชบา :
+พันธุ์ชบาที่นิยมปลูกมาจะเป็นพันธุ์ฮาวาย ซึ่งมีมากกว่า 400 ชนิด และทั่วไปนิยมปลูกจากต้นพันธุ์ที่ได้จากการตอนกิ่ง หรือ การปักชำ
+
+การตอนกิ่งชบาจะเลือกกิ่งที่มีสีน้ำตาล ขนาดกิ่งประมาณเท่านิ้วก้อยถึงนิ้วชี้ ส่วนการปักชำชำกิ่งจะใช้ทั้งกิ่งขนาดใหญ่จนถึงเล็กประมาณเท่านิ้วชี้เช่นกัน ซึ่งจะตัดกิ่งให้ยาวประมาณ 20-25 เซนติเมตร ก่อนปักชำเอียง 45 องศา ในกระถางเพาะชำ
+                                    </p>
+                                                   
+                                    <p>
+                                        การดูแลรักษา :
+                                        ดอกชบาชอบแสงแดดมาก 
+                                        ต้องการน้ำพอประมาณ 
+                                        เป็นไม้ที่ปลูกได้ง่ายสามารถเจริญเติบโตได้ในดินแทบทุกชนิด แต่ไม่ควรให้ดินเปียกหรือแฉะเกินไป 
+                                        ต้นชบาควรใส่ปุ๋ยคอกหรือปุ๋ยหมัก
+                                        
+                                    </p>
+                                                                           
+                                </div>									
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navigation-area">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                                <div class="thumb">
+                                    <a href="#"><img class="img-fluid" src="img/blog/prev.jpg" alt=""></a>
+                                </div>
+                                <div class="arrow">
+                                    <a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
+                                </div>
+                                <div class="detials">
+                                    <p>Prev Post</p>
+                                    <a href="#"><h4>Space The Final Frontier</h4></a>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                                <div class="detials">
+                                    <p>Next Post</p>
+                                    <a href="#"><h4>Telescopes 101</h4></a>
+                                </div>
+                                <div class="arrow">
+                                    <a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>
+                                </div>
+                                <div class="thumb">
+                                    <a href="#"><img class="img-fluid" src="img/blog/next.jpg" alt=""></a>
+                                </div>										
+                            </div>									
+                        </div>
+                    </div>
+                    <!-- <div class="comments-area"> -->
+                        <div>
+
+                            <!-- <h4>05 Comments</h4>
+                            <div class="comment-list">
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img src="img/blog/c1.jpg" alt="">
+                                        </div>
+                                        <div class="desc">
+                                            <h5><a href="#">Emilly Blunt</a></h5>
+                                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                                            <p class="comment">
+                                                Never say goodbye till the end comes!
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="reply-btn">
+                                           <a href="" class="btn-reply text-uppercase">reply</a> 
+                                    </div>
+                                </div>
+                            </div>	
+                            <div class="comment-list left-padding">
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img src="img/blog/c2.jpg" alt="">
+                                        </div>
+                                        <div class="desc">
+                                            <h5><a href="#">Elsie Cunningham</a></h5>
+                                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                                            <p class="comment">
+                                                Never say goodbye till the end comes!
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="reply-btn">
+                                           <a href="" class="btn-reply text-uppercase">reply</a> 
+                                    </div>
+                                </div>
+                            </div>	
+                            <div class="comment-list left-padding">
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img src="img/blog/c3.jpg" alt="">
+                                        </div>
+                                        <div class="desc">
+                                            <h5><a href="#">Annie Stephens</a></h5>
+                                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                                            <p class="comment">
+                                                Never say goodbye till the end comes!
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="reply-btn">
+                                           <a href="" class="btn-reply text-uppercase">reply</a> 
+                                    </div>
+                                </div>
+                            </div>	
+                            <div class="comment-list">
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img src="img/blog/c4.jpg" alt="">
+                                        </div>
+                                        <div class="desc">
+                                            <h5><a href="#">Maria Luna</a></h5>
+                                            <p class="date">December 4, 2017 at 3:12 pm </p>
+                                            <p class="comment">
+                                                Never say goodbye till the end comes!
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="reply-btn">
+                                           <a href="" class="btn-reply text-uppercase">reply</a> 
+                                    </div>
+                                </div> -->
+                                <!-- เพิ่ม -->
+                                <div id="messages"></div>
+                                <form>
+                                    <input type="text" id = "name" autocomplete="off" autofocus placeholder="Type name...">
+                                    <input type="text" id = "message" autocomplete="off" autofocus placeholder="Type message...">
+                                     <input type="submit" value = "Send" onclick="re()">
+                                </form>
+                                 <!-- เพิ่ม -->
+                            
+                    </div>
+                   
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget search_widget">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search Posts">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
+                                </span>
+                            </div><!-- /input-group -->
+                            <div class="br"></div>
+                        </aside>
+                        <aside class="single_sidebar_widget author_widget">
+                            <img class="author_img rounded-circle" src="img/blog/author_1.png" alt="">
+                            <h4>Cnn.gineer</h4>
+                            <p>Teen blogger</p>
+                            <div class="social_icon">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-github"></i></a>
+                                <a href="#"><i class="fa fa-behance"></i></a>
+                            </div>
+                            <p>Some people try to cover us with the soil but forget that
+                                We are just rain, rain comes down.
+                                We are ready to grow like a brave man.
+                                Can grow even when not in the pot</p>
+                            <div class="br"></div>
+                        </aside>
+                    
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================Blog Area =================-->
+    
+    <!--================Instagram Area =================-->
+    <section class="instagram_area">
+        <div class="container box_1620">
+            <div class="insta_btn">
+                <a class="btn theme_btn" href="#">Follow us on instagram</a>
+            </div>
+            <div class="instagram_image row m0">
+                <a href="#"><img src="img/instagram/ins-1.jpg" alt=""></a>
+                <a href="#"><img src="img/instagram/ins-2.jpg" alt=""></a>
+                <a href="#"><img src="img/instagram/ins-3.jpg" alt=""></a>
+                <a href="#"><img src="img/instagram/ins-4.jpg" alt=""></a>
+                <a href="#"><img src="img/instagram/ins-5.jpg" alt=""></a>
+                <a href="#"><img src="img/instagram/ins-6.jpg" alt=""></a>
+            </div>
+        </div>
+    </section>
+    <!--================End Instagram Area =================-->
+     
+   
+    <!--================Footer Area =================-->
+    
+    <center><footer class="footer_area">
+        <div class="container">
+            <div class="row footer_inner">
+                <div class="col-lg-5 col-sm-6" ></div>
+                <div class="col-lg-2">
+                    <aside class="f_widget social_widget">
+                        <div class="f_title">
+                            <h3>Made by</h3>
+                        </div>
+                        <p>นางสาว วนัฐชญา บุญยพรหม<br>นางสาว ศิริประภา จารุมูล</p>
+                        <ul class="list">
+                            <li><a href="https://web.facebook.com/tree.tworoom"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.instagram.com/tree.room/"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--================End Footer Area =================-->
+    
+    
+    
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/stellar.js"></script>
+    <script src="vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="vendors/isotope/isotope.pkgd.min.js"></script>
+    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="vendors/popup/jquery.magnific-popup.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendors/counter-up/jquery.counterup.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+        function re(){
+            location.reload(true);
+        }
+    </script>
+</body>
+</html>
